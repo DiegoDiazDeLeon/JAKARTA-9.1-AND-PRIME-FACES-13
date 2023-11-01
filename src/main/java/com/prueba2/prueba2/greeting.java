@@ -7,6 +7,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class greeting {
 
     public String generateGreet(String name){
-        return "Eres Gay"+name;
+        return "Eres "+name;
     }
 }

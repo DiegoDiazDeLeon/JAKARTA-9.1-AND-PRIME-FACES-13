@@ -10,7 +10,9 @@
   <name>Prueba2</name>
   <packaging>war</packaging>
 
+
   <properties>
+      <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
@@ -18,7 +20,18 @@
   </properties>
 
   <dependencies>
-
+      <!-- POSTGRES SQL-->
+      <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>42.5.1</version>
+      </dependency>
+      <!-- HIBERNATE  -->
+      <dependency>
+          <groupId>org.hibernate.orm</groupId>
+          <artifactId>hibernate-core</artifactId>
+          <version>6.0.2.Final</version>
+      </dependency>
       <!-- JAKARTA PLATAFORM  -->
       <dependency>
           <groupId>jakarta.platform</groupId>
@@ -44,7 +57,7 @@
         <dependency>
               <groupId>jakarta.servlet</groupId>
               <artifactId>jakarta.servlet-api</artifactId>
-              <version>6.0.0</version>
+              <version>5.0.0</version>
               <scope>provided</scope>
         </dependency>
               <!-- CDI INJECTION -->
@@ -72,10 +85,37 @@
       <finalName>Prueba2</finalName>
     <plugins>
         <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.2</version>
-      </plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.2</version>
+        </plugin>
+        <plugin>
+            <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-jar-maven-plugin</artifactId>
+            <version>10.0.0.Final</version>
+            <configuration>
+                <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#26.1.3.Final</feature-pack-location>
+                <layers>
+                    <layer>jaxrs-server</layer>
+                    <layer>datasources-web-server</layer>
+                    <layer>web-clustering</layer>
+                    <layer>cdi</layer>
+                    <layer>web-server</layer>
+                    <layer>webservices</layer>
+                    <layer>jsf</layer>
+                </layers>
+                <plugin-options>
+                    <jboss-fork-embedded>true</jboss-fork-embedded>
+                </plugin-options>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>package</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
 </project>
