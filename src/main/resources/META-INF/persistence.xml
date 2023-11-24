@@ -4,44 +4,5 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
-    <persistence-unit name="redeyePU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- 		<non-jta-data-source>madmin</non-jta-data-source> -->
-    <!-- 		<class>sv.gob.bfa.bus.abstraccion.dto.BiSolSeguro</class> -->
-    <!-- 		<exclude-unlisted-classes>false</exclude-unlisted-classes> -->
-    <properties>
-          <!-- 		PSQL Stuff -->
-          <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-          <property name="hibernate.connection.url" value="jdbc:postgresql://192.168.23.9:32394/spring" />
-          <property name="hibernate.connection.username" value="zitruz" />
-          <property name="hibernate.connection.password" value="root" />
-          <!-- 			<property name="hibernate.connection.url" value="jdbc:postgresql://sch-db.postgres.database.azure.com:5432/geometry" /> -->
-          <!-- 			<property name="hibernate.connection.username" value="spring" /> -->
-          <!-- 			<property name="hibernate.connection.password" value="ladbchida147%" /> -->
-          <property name="hibernate.show_sql" value="true" />
-          <property name="hibernate.format_sql" value="true" />
-          <property name="hibernate.default_schema" value="public" />
-          <property name="hibernate.jdbc.time_zone" value="UTC" />
-          <property name="hibernate.connection.release_mode" value="after_transaction"/>
-          <property name="hibernate.dbcp.validationQuery" value="SELECT 1"/>
-          <property name="hibernate.dbcp.testOnBorrow" value="true"/>
-          <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-
-
-
-          <!-- manage automatic database creation -->
-          <!--         <property name="hibernate.hbm2ddl.auto" value="">create-drop</property> -->
-
-          <!-- dbcp connection pool configuration -->
-          <property name="hibernate.dbcp.initialSize" value="3"/>
-          <property name="hibernate.dbcp.maxTotal" value="30"/>
-          <property name="hibernate.dbcp.maxIdle" value="3"/>
-          <property name="hibernate.dbcp.minIdle" value="1"/>
-          <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
-    </properties>
-
-
-
-
   </persistence-unit>
 </persistence>
