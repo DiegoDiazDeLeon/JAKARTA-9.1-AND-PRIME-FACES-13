@@ -1,16 +1,16 @@
 package com.prueba2.prueba2.dto;
 
-import com.prueba2.prueba2.dao.MySupplierDao;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import java.util.List;
+import java.util.Map;
+
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
-import org.primefaces.model.SortOrder;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.prueba2.prueba2.dao.MySupplierDao;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class SupplierLazy extends LazyDataModel<Supplier> {
@@ -18,6 +18,7 @@ public class SupplierLazy extends LazyDataModel<Supplier> {
 
     private MySupplierDao supplierDao;
 
+    @Inject
     public SupplierLazy(MySupplierDao supplierDao) {
         this.supplierDao = supplierDao;
     }
@@ -28,8 +29,11 @@ public class SupplierLazy extends LazyDataModel<Supplier> {
     }
 
     @Override
-    public List<Supplier> load(int first, int pageSize, Map<String, SortMeta> multiSortMeta, Map<String, FilterMeta> multiFilterMeta) {
-            return supplierDao.getSuppliers(first, pageSize);
+    public List<Supplier> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
+        System.out.println("Loading suppliers: first=" + first + ", pageSize=" + pageSize);
+        List<Supplier> suppliers = supplierDao.getSuppliers(first, pageSize);
+        System.out.println("Retrieved " + suppliers.size() + " suppliers.");
+        return suppliers;
     }
 
 }
