@@ -11,13 +11,10 @@
 <h:body>
     <div class="card">
     <h:form id="form">
-    <p:dataTable id="supplierList" var="supplier" value="#{mySupplierController.supplierList}" rowKey="#{mySupplierController.selectedSupplier.supplierId}"
-                 selection="#{mySupplierController.selectedSupplier}" selectionMode="single">
-
+    <p:dataTable id="supplierList" var="supplier" value="#{mySupplierController.lazyModel}" rows="2" lazy="true" >
         <p:column headerText="Name">
             <h:outputText value="#{supplier.name}" />
         </p:column>
-
     </p:dataTable>
     </h:form>
     </div>

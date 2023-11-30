@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.model.LazyDataModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,37 +15,39 @@ import java.util.List;
 @Named("mySupplierController")
 @ViewScoped
 public class MySupplierController implements Serializable {
-    private List<Supplier> supplierList;
-
-    private Supplier selectedSupplier;
 
     @Inject
-    private MySupplierDao serviceDao;
+    MySupplierDao supplierDao;
+    private LazyDataModel<Supplier> lazyModel;
+
+    //private List<Supplier> supplierList;
+
+    //private Supplier selectedSupplier;
 
     @PostConstruct
     public void init() {
-        supplierList=serviceDao.getSuppliers();
+        lazyModel = new SupplierLazy(supplierDao);
+    }
+
+    public LazyDataModel<Supplier> getLazyModel() {
+        return lazyModel;
     }
 
     //regresa supplier list de aqui
-    public List<Supplier> getSupplierList() {
-        return supplierList;
-    }
+    //public List<Supplier> getSupplierList() {
+      //  return supplierList;
+    //}
 
     //regresa el suplier seleccionado
-    public Supplier getSelectedSupplier() {
-        return selectedSupplier;
-    }
+    //public Supplier getSelectedSupplier() {
+        //return selectedSupplier;
+    //}
 
     //pone en el suplier seleccionado
-    public void setSelectedSupplier(Supplier selectedSupplier) {
-        this.selectedSupplier = selectedSupplier;
-    }
+    //public void setSelectedSupplier(Supplier selectedSupplier) {
+      //  this.selectedSupplier = selectedSupplier;
+    //}
 
-    //pone el service de Dao en el dao
-    public void setService(MySupplierDao serviceDao) {
-        this.serviceDao = serviceDao;
-    }
 
 
 }
