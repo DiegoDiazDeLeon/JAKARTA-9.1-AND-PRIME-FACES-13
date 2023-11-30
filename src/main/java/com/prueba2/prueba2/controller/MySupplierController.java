@@ -22,7 +22,7 @@ public class MySupplierController implements Serializable {
 
     //private List<Supplier> supplierList;
 
-    //private Supplier selectedSupplier;
+    private Supplier selectedSupplier;
 
     @PostConstruct
     public void init() {
@@ -39,14 +39,19 @@ public class MySupplierController implements Serializable {
     //}
 
     //regresa el suplier seleccionado
-    //public Supplier getSelectedSupplier() {
-        //return selectedSupplier;
-    //}
+    public Supplier getSelectedSupplier() {
+        return selectedSupplier;
+    }
 
     //pone en el suplier seleccionado
-    //public void setSelectedSupplier(Supplier selectedSupplier) {
-      //  this.selectedSupplier = selectedSupplier;
-    //}
+    public void setSelectedSupplier(Supplier selectedSupplier) {
+        this.selectedSupplier = selectedSupplier;
+    }
+
+    //pone el service de Dao en el dao
+    public void setService(MySupplierDao supplierDao) {
+        this.supplierDao = supplierDao;
+    }
 
 
 

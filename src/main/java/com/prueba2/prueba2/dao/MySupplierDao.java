@@ -9,10 +9,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import java.util.List;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Named
@@ -37,10 +38,11 @@ public class MySupplierDao {
     //}
 
     public List<Supplier> getSuppliers(int first, int pageSize) {
-        Query query = em.createQuery("SELECT s FROM Supplier s", Supplier.class);
+        TypedQuery<Supplier> query = em.createQuery("SELECT s FROM Supplier s", Supplier.class);
         query.setFirstResult(first);
         query.setMaxResults(pageSize);
-        return query.getResultList();
+        List<Supplier> list= query.getResultList();
+        return list;
     }
 
     public int countAllSuppliers() {

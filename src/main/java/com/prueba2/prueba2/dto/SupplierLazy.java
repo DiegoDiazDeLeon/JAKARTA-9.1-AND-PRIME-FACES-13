@@ -15,9 +15,9 @@ import java.util.Map;
 @Named
 public class SupplierLazy extends LazyDataModel<Supplier> {
 
-
     private MySupplierDao supplierDao;
 
+    @Inject
     public SupplierLazy(MySupplierDao supplierDao) {
         this.supplierDao = supplierDao;
     }
@@ -28,7 +28,7 @@ public class SupplierLazy extends LazyDataModel<Supplier> {
     }
 
     @Override
-    public List<Supplier> load(int first, int pageSize, Map<String, SortMeta> multiSortMeta, Map<String, FilterMeta> multiFilterMeta) {
+    public List<Supplier> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
             return supplierDao.getSuppliers(first, pageSize);
     }
 
