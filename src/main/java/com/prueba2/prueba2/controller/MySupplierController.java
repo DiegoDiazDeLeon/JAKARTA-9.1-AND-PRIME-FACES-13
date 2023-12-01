@@ -21,22 +21,15 @@ public class MySupplierController implements Serializable {
 
     @Inject
     MySupplierDao supplierDao;
-
-    private List<Supplier> suppliersList;
-    
+   
     private LazyDataModel<Supplier> lazyModel;
 
     @PostConstruct
     public void init() {
         System.out.println("*******MySupplierController bean initialized.**********");
         lazyModel = new SupplierLazy(supplierDao);
-        suppliersList = lazyModel;
         lazyModel.setRowCount(supplierDao.countAllSuppliers());
         printLazyModelContent();
-    }
-
-    public List<Supplier> getSuppliersList(){
-        return suppliersList;
     }
 
     public LazyDataModel<Supplier> getLazyModel() {
