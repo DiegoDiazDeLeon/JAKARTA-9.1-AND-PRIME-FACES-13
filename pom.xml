@@ -117,6 +117,9 @@
                 <plugin-options>
                     <jboss-fork-embedded>true</jboss-fork-embedded>
                 </plugin-options>
+                <jvmArguments>
+                      <arg>-agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n</arg>
+                </jvmArguments>
             </configuration>
             <executions>
                 <execution>

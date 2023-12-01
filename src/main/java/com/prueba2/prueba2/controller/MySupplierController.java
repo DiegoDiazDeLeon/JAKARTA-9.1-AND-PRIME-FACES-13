@@ -11,7 +11,6 @@ import com.prueba2.prueba2.dto.SupplierLazy;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -29,7 +28,7 @@ public class MySupplierController implements Serializable {
         System.out.println("*******MySupplierController bean initialized.**********");
         lazyModel = new SupplierLazy(supplierDao);
         lazyModel.setRowCount(supplierDao.countAllSuppliers());
-        printLazyModelContent();
+        //printLazyModelContent();
     }
 
     public LazyDataModel<Supplier> getLazyModel() {
