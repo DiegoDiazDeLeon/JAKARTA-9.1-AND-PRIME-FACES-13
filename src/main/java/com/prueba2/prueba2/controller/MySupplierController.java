@@ -1,6 +1,7 @@
 package com.prueba2.prueba2.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.primefaces.model.LazyDataModel;
 
@@ -20,6 +21,8 @@ public class MySupplierController implements Serializable {
 
     @Inject
     MySupplierDao supplierDao;
+
+    private List<Supplier> suppliersList;
     
     private LazyDataModel<Supplier> lazyModel;
 
@@ -27,7 +30,13 @@ public class MySupplierController implements Serializable {
     public void init() {
         System.out.println("*******MySupplierController bean initialized.**********");
         lazyModel = new SupplierLazy(supplierDao);
+        suppliersList = lazyModel;
         lazyModel.setRowCount(supplierDao.countAllSuppliers());
+        printLazyModelContent();
+    }
+
+    public List<Supplier> getSuppliersList(){
+        return suppliersList;
     }
 
     public LazyDataModel<Supplier> getLazyModel() {
@@ -37,6 +46,15 @@ public class MySupplierController implements Serializable {
 
     public void setService(MySupplierDao supplierDao) {
       this.supplierDao = supplierDao;
+    }
+
+    private void printLazyModelContent() {
+        List<Supplier> suppliers = lazyModel.load(0, 10, null, null);
+        System.out.println("LazyModel Content:");
+
+        for (Supplier supplier : suppliers) {
+            System.out.println("Supplier: " + supplier.getName() + ", ID: " + supplier.getSupplierId());
+        }
     }
 
 

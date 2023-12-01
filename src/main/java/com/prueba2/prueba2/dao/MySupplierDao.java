@@ -1,5 +1,6 @@
 package com.prueba2.prueba2.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.prueba2.prueba2.dto.Supplier;
@@ -22,17 +23,18 @@ public class MySupplierDao {
 
     public List<Supplier> getSuppliers(int first, int pageSize) {
         System.out.println("Calling getSuppliers method. first: " + first + ", pageSize: " + pageSize);
-    
-        TypedQuery<Supplier> query = em.createQuery("SELECT s FROM Supplier s", Supplier.class);
-        query.setFirstResult(first);
-        query.setMaxResults(pageSize);
-        
-        List<Supplier> suppliers = query.getResultList();
-        
-        System.out.println("Found " + suppliers.size() + " suppliers.");
-        
-        return suppliers;
-      
+        List<Supplier> result = new ArrayList<>();
+        try{
+            TypedQuery<Supplier> query = em.createQuery("SELECT s FROM Supplier s", Supplier.class);
+            query.setFirstResult(first);
+            query.setMaxResults(pageSize);
+            result = query.getResultList();
+            System.out.println("Found " + result.size() + " suppliers.");
+        }
+        catch (Exception e) {
+			e.printStackTrace();
+        }
+        return result;
     }
 
     public int countAllSuppliers() {
