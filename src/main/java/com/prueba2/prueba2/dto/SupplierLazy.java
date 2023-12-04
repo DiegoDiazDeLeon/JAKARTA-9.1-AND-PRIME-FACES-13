@@ -21,11 +21,12 @@ public class SupplierLazy extends LazyDataModel<Supplier> {
     @Inject
     public SupplierLazy(MySupplierDao supplierDao) {
         this.supplierDao = supplierDao;
+        
     }
 
     @Override
     public int count(Map<String, FilterMeta> map) {
-        return 0;
+        return supplierDao.countAllSuppliers();
     }
 
     @Override
@@ -33,6 +34,7 @@ public class SupplierLazy extends LazyDataModel<Supplier> {
         System.out.println("Loading suppliers: first=" + first + ", pageSize=" + pageSize);
         List<Supplier> suppliers = supplierDao.getSuppliers(first, pageSize);
         System.out.println("Retrieved " + suppliers.size() + " suppliers.");
+        //this.setRowCount(supplierDao.countAllSuppliers());
         return suppliers;
     }
 
